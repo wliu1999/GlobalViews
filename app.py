@@ -31,8 +31,6 @@ def home_page():
 def user_page():
     return render_template("user.html")
 
-
-
 app.run(
     debug=True
     # host="0.0.0.0",
