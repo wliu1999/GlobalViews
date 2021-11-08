@@ -16,9 +16,36 @@ from flask_sqlalchemy import SQLAlchemy
 # API tools
 import os
 
-# Flask app initialization and db setup
+# Fixing Database URI to postgresql format
+uri = os.getenv("DATABASE_URL")
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+# Flask app initialization, db setup, login setup
 app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
+
+login_manager = LoginManager(app)
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get((id))
+
+# Database classes here
+# Username probably subject to change based on how Google OAuth works, as that's how we're logging users in.
+# Country 1-5 are meant to store the user's 5 favorite countries to be pinned in order
+    # This is just an idea subject to change
+# Accountage stored in hours
+
+# UserPreferences Table
+    # username = db.Column(db.String(20), primary_key=True)
+    # country1 = db.Column(db.String(40))
+    # country2 = db.Column(db.String(40))
+    # country3 = db.Column(db.String(40))
+    # country4 = db.Column(db.String(40))
+    # country5 = db.Column(db.String(40))
+    # accountage = db.Column(db.Integer)
 
 # App Routing
 @app.route("/")
@@ -44,6 +71,7 @@ def callback():
         # If user is not authenticated properly, send them back to the login endpoint
 
     # Authentication happens here!
+    return flask.redirect(flask.url_for("home_page"))
     
 @app.route("/home")
 def home_page():
@@ -83,12 +111,16 @@ def logout():
     # Expected output: redirect user to login endpoint
     
     # Log out user here
+    return flask.redirect(flask.url_for("login_page"))
 
 
-#Initialize db and run application
-db.create_all()
+# Initialize db and run application
+# For testing, comment out host and port lines.
+
+# Add once model for database has been created
+# db.create_all()
 app.run(
     debug=True
-    # host="0.0.0.0",
-    # port=int(os.getenv("PORT", 8080)),
+    #host="0.0.0.0",
+    #port=int(os.getenv("PORT", 8080)),
 )
