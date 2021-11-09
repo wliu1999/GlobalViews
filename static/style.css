@@ -20,17 +20,18 @@ h1{
 }
   
 .item {
-    background-color: rgba(255, 255, 255);
+    background-color: rgba(127, 252, 194);
     border: 1px solid rgba(0, 0, 0);
+    border-radius: 4px;
     height: 240px;
     width: 320px;
 }
 
 .item > img {
-    border: 1px solid #ddd;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
-    height: 100%;
-    width: 100%;
+    height: 240px;
+    width: 320px;
 }
   
 img:hover {
