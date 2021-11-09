@@ -7,3 +7,33 @@ h1{
     color:rgb(0, 0, 0);
     font-size: 28;
 }
+
+.container {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-template-columns: auto auto auto;
+    background-color: #65c49c;
+    padding: 20px;
+    border-radius: 4px;
+    justify-items: center;
+}
+  
+.item {
+    background-color: rgba(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0);
+    height: 240px;
+    width: 320px;
+}
+
+.item > img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+}
+  
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+  
