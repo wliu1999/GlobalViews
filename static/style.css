@@ -16,16 +16,21 @@ h1{
     background-color: #65c49c;
     padding: 20px;
     border-radius: 4px;
+    justify-items: center;
   }
   
   .item {
     background-color: rgba(255, 255, 255);
     border: 1px solid rgba(0, 0, 0);
+    height: 240px;
+    width: 320px;
   }
 
-  img {
+  .item > img {
     border: 1px solid #ddd;
     border-radius: 4px;
+    height: 100%;
+    width: 100%;
   }
   
   img:hover {
