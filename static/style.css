@@ -12,7 +12,7 @@ h1{
     display: grid;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     background-color: #65c49c;
     padding: 20px;
     border-radius: 4px;
