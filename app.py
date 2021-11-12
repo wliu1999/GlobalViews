@@ -24,6 +24,9 @@ from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 
+# Local Imports
+import YoutubeAPI as yt
+
 
 # Fixing Database URI to postgresql format
 uri = os.getenv("DATABASE_URL")
@@ -167,6 +170,10 @@ def user_page():
     # Log Out (redirect to logout endpoint)
     # Url should come in format "/user/country=USA"
 
+    # Calling API
+    TopFiveTitleList = yt.GetTopFive(flow)
+
+
     # Load user info
 
     # Load country video info
@@ -176,7 +183,7 @@ def user_page():
     # This should be a list of urls extracted from a JSON response.
 
     # Pass info to render in page
-    return render_template("user.html")
+    return render_template("user.html", titles = TopFiveTitleList)
 
 
 # Initialize db and run application
