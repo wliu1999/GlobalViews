@@ -171,7 +171,7 @@ def user_page():
     # Url should come in format "/user/country=USA"
 
     # Calling API
-    TopFiveTitleList = yt.GetTopFive(flow)
+    TitleList, IDList = yt.GetTopFive(flow)
 
 
     # Load user info
@@ -183,7 +183,7 @@ def user_page():
     # This should be a list of urls extracted from a JSON response.
 
     # Pass info to render in page
-    return render_template("user.html", titles = TopFiveTitleList)
+    return render_template("user.html", titles = TitleList, ids = IDList)
 
 
 # Initialize db and run application

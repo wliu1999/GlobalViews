@@ -30,7 +30,10 @@ def GetTopFive(flow):
     response = request.execute()
 
     VideoTitles = []
+    VideoIDs = []
     for item in response["items"]:
         VideoTitles.append(item["snippet"]["title"])
+        VideoIDs.append("https://www.youtube.com/watch?v=" + item["id"]["videoId"])
 
-    return VideoTitles
+
+    return VideoTitles, VideoIDs

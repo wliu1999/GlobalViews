@@ -15,11 +15,22 @@
     </form>
     <a href='/logout'><button>Logout</button></a>
 
-    <ul>
-        {% for title in titles %}
-        <li>{{ title }}</li>
-        {% endfor %}
-    </ul>
+    <div class = "videocontainer">
+        <div class = "lefthalf">
+            <ul>
+                {% for title in titles %}
+                <li>{{ title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class = "righthalf">
+            <ul>
+                {% for vid in ids %}
+                <a href = {{ vid }}>Youtube Link</a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>
