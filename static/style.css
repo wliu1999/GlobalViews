@@ -9,9 +9,11 @@ h1{
 }
 
 .container {
+    width: 88%;
+    margin: auto;
     display: grid;
     grid-column-gap: 10px;
-    grid-row-gap: 10px;
+    grid-row-gap: 50px;
     grid-template-columns: auto auto auto auto;
     background-color: #65c49c;
     padding: 20px;
@@ -23,15 +25,15 @@ h1{
     background-color: rgba(127, 252, 194);
     border: 1px solid rgba(0, 0, 0);
     border-radius: 4px;
-    height: 240px;
-    width: 320px;
+    height: 160px;
+    width: 240px;
 }
 
 .item > img {
     border: 1px solid rgb(0, 0, 0);
     border-radius: 4px;
-    height: 240px;
-    width: 320px;
+    height: 160px;
+    width: 240px;
 }
   
 img:hover {
