@@ -16,20 +16,14 @@
     <a href='/logout'><button>Logout</button></a>
 
     <div class = "videocontainer">
-        <div class = "lefthalf">
-            <ul>
-                {% for title in titles %}
-                <li>{{ title }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class = "righthalf">
-            <ul>
-                {% for vid in ids %}
-                <a href = {{ vid }}>Youtube Link</a>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul>
+            {% for item in videoinfo %}
+                <img src = {{ item[2] }} alt="Video Thumbnail">
+                <h1>{{ item[0] }}</h1>
+                <a href = {{ item[1] }}>Youtube Link</a>
+                <h1> ----------------------------------------------------- </h1>
+            {% endfor %}
+        </ul>
     </div>
 </body>
 
