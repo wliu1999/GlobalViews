@@ -24,7 +24,7 @@ def GetTopFive(flow):
 
     request = youtube.search().list(
         part="snippet",
-        regionCode="US",
+        regionCode="us",
         type="video"
     )
     response = request.execute()
