@@ -4,7 +4,7 @@ var region_code_array = new Array();
 var duplicate = false;
 var fav_index = 0;
 
-// create flag images using new Image()
+// hardcode flags
 flag_image_array[0] = new Image();
 flag_image_array[0].src = '/static/resources/br.png';
 region_code_array.push('br');
@@ -69,6 +69,7 @@ flag_image_array[20] = new Image();
 flag_image_array[20].src = '/static/resources/ye.png';
 region_code_array.push('ye');
 
+// display hardcoded flags
 for (let i = 0; i <= 20; i++) {
     let temp = document.createElement('div');
     temp.className = 'item';
@@ -77,7 +78,7 @@ for (let i = 0; i <= 20; i++) {
 }
 // Default: 21 flags displayed in the screen 
 
-// add flag to fav_image_array, only if array length < 4
+// function to add flag to fav_image_array, only if array length < 4
 function add_to_fav(i) {
     duplicate = false;
     if (fav_index < 4) {
