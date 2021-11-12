@@ -36,9 +36,8 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
-
 # google login ids ad secret keys
-app.secret_key= os.getenv("secret_key")
+app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
@@ -131,8 +130,7 @@ def callback():
 
     # Expected output:
     # If user is authenticated properly, send them to the home endpoint
-    return redirect("/user")
-    
+    return redirect("/home")
 
 
 @app.route("/logout")
