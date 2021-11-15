@@ -8,7 +8,8 @@
         <form action="/home" method="GET">
             <input type="submit" value="Go to homepage"></input>
         </form>
-        <form action="/user" method="GET">
+        <form action="/user" method="POST">
+            <input type="hidden" name="code" id="code" value="us">
             <input type="submit" value="Go to user page"></input>
         </form>
         <a href ='/login'><button>Login</button></a>

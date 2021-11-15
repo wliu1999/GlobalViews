@@ -14,6 +14,18 @@
         <input type="submit" value="Go to login page"></input>
     </form>
     <a href='/logout'><button>Logout</button></a>
+
+    <div class = "videocontainer">
+        <img src = {{ flagsrc }} alt="Flag">
+        <ul>
+            {% for item in videoinfo %}
+                <img src = {{ item[2] }} alt="Video Thumbnail">
+                <h1>{{ item[0] }}</h1>
+                <a href = {{ item[1] }}>Youtube Link</a>
+                <h1> ----------------------------------------------------- </h1>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 
 </html>
