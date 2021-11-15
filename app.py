@@ -23,6 +23,8 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
+import google_auth_oauthlib.flow
+
 
 # Local Imports
 import YoutubeAPI as yt
@@ -39,18 +41,19 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
-# google login ids ad secret keys
+# google login ids and secret keys
 app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
-
-flow = Flow.from_client_secrets_file(
-    client_secrets_file=client_secrets_file,
-    scopes=[
+scopes=[
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/userinfo.email",
         "openid",
-    ],
+    ]
+
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=scopes,
     redirect_uri="http://127.0.0.1:5000/callback",
 )
 
@@ -173,7 +176,7 @@ def user_page():
     # Url should come in format "/user/us"
 
     # Calling API
-    TitleList, IDList, VideoInformation = yt.GetTopFive(flow)
+    VideoInformation = yt.GetTopFive()
 
     # Get country code
     code = request.form['code']
@@ -191,7 +194,7 @@ def user_page():
     # This should be a list of urls extracted from a JSON response.
 
     # Pass info to render in page
-    return render_template("user.html", titles = TitleList, ids = IDList, videoinfo = VideoInformation, flagsrc = flag)
+    return render_template("user.html", videoinfo = VideoInformation, flagsrc = flag)
 
 
 # Initialize db and run application
