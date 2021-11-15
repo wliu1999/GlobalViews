@@ -80,7 +80,8 @@ for (let i = 0; i <= 20; i++) {
 
 // function for when flags are clicked, passes region code and redirect to user page.
 function pass_region_code(i) {
-    document.getElementById('code').value = region_code_array[i];
+    document.getElementById("code").value = region_code_array[i];
+    document.getElementById("form_id").submit();
 }
 
 // function to add flag to fav_image_array, only if array length < 4
