@@ -1,4 +1,5 @@
 import os
+import json
 
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
@@ -6,42 +7,35 @@ import googleapiclient.errors
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-def GetTopFive(flow):
+def GetTopFive():
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     # os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
     api_service_name = "youtube"
     api_version = "v3"
-    client_secrets_file = "client_secret.json"
+    API_KEY = os.getenv("API_KEY")
 
-    # Get credentials and create an API client
-    flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-        client_secrets_file, scopes)
-    credentials = flow.run_console()
+    # Create Youtube API client
     youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, credentials=credentials)
+        api_service_name, api_version, developerKey=API_KEY)
 
-    request = youtube.search().list(
+    request = youtube.videos().list(
         part="snippet",
-        regionCode="us",
-        type="video"
+        chart="mostPopular",
+        regionCode="us"
     )
     response = request.execute()
 
-    VideoTitles = []
-    VideoIDs = []
     VideoInformation = []
     i = 0
     for item in response["items"]:
-        VideoTitles.append(item["snippet"]["title"])
-        VideoIDs.append("https://www.youtube.com/watch?v=" + item["id"]["videoId"])
         VideoInformation.append([])
         VideoInformation[i].append(item["snippet"]["title"])
-        VideoInformation[i].append("https://www.youtube.com/watch?v=" + item["id"]["videoId"])
+        VideoInformation[i].append("https://www.youtube.com/watch?v=" + item["id"])
         VideoInformation[i].append(item["snippet"]["thumbnails"]["medium"]["url"])
         i = i + 1
 
 
 
-    return VideoTitles, VideoIDs, VideoInformation
+    return VideoInformation

@@ -73,10 +73,15 @@ region_code_array.push('ye');
 for (let i = 0; i <= 20; i++) {
     let temp = document.createElement('div');
     temp.className = 'item';
-    temp.innerHTML = '<img src=' + flag_image_array[i].src + '><button onclick="add_to_fav(' + i + ')">FAV</button>';
+    temp.innerHTML = '<img src=' + flag_image_array[i].src + ' onclick="pass_region_code(' + i + ')" ><button onclick="add_to_fav(' + i + ')">FAV</button>';
     document.getElementById('container').appendChild(temp);
 }
 // Default: 21 flags displayed in the screen 
+
+// function for when flags are clicked, passes region code and redirect to user page.
+function pass_region_code(i) {
+    document.getElementById('code').value = region_code_array[i];
+}
 
 // function to add flag to fav_image_array, only if array length < 4
 function add_to_fav(i) {
