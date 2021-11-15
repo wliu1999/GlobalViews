@@ -7,7 +7,8 @@ import googleapiclient.errors
 
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
-def GetTopFive():
+
+def GetTopFive(code):
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     # os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -18,12 +19,11 @@ def GetTopFive():
 
     # Create Youtube API client
     youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, developerKey=API_KEY)
+        api_service_name, api_version, developerKey=API_KEY
+    )
 
     request = youtube.videos().list(
-        part="snippet",
-        chart="mostPopular",
-        regionCode="us"
+        part="snippet", chart="mostPopular", regionCode=code
     )
     response = request.execute()
 
@@ -35,7 +35,5 @@ def GetTopFive():
         VideoInformation[i].append("https://www.youtube.com/watch?v=" + item["id"])
         VideoInformation[i].append(item["snippet"]["thumbnails"]["medium"]["url"])
         i = i + 1
-
-
 
     return VideoInformation
