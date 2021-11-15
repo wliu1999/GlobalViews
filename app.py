@@ -131,7 +131,7 @@ def callback():
 
     # Expected output:
     # If user is authenticated properly, send them to the home endpoint
-    return redirect("/user")
+    return redirect("/home")
     
 
 
