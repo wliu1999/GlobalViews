@@ -136,6 +136,7 @@ def callback():
     return redirect("/home")
 
 
+
 @app.route("/logout")
 def logout():
     # Expected input: none
