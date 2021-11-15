@@ -56,11 +56,11 @@ class User(db.Model):
 app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
-scopes=[
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email",
-        "openid",
-    ]
+scopes = [
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "https://www.googleapis.com/auth/userinfo.email",
+    "openid",
+]
 
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
@@ -185,11 +185,10 @@ def user_page():
     # Log Out (redirect to logout endpoint)
     # Url should come in format "/user/us"
 
-    # Calling API
-    VideoInformation = yt.GetTopFive()
-
     # Get country code
     code = request.form["code"]
+    # Calling API
+    VideoInformation = yt.GetTopFive(code)
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
@@ -206,8 +205,6 @@ def user_page():
     # Pass info to render in page
     return render_template(
         "user.html",
-        titles=TitleList,
-        ids=IDList,
         videoinfo=VideoInformation,
         flagsrc=flag,
     )
