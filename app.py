@@ -24,6 +24,9 @@ from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
 
+# Local Imports
+import YoutubeAPI as yt
+
 
 # Fixing Database URI to postgresql format
 uri = os.getenv("DATABASE_URL")
@@ -36,9 +39,8 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
-
 # google login ids ad secret keys
-app.secret_key= os.getenv("secret_key")
+app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 
@@ -132,7 +134,7 @@ def callback():
     # Expected output:
     # If user is authenticated properly, send them to the home endpoint
     return redirect("/home")
-    
+
 
 
 @app.route("/logout")
@@ -152,22 +154,33 @@ def home_page():
     # Expected user input: click on country, click on logout button
     # Expected outputs:
     # Selected country (redirect to user endpoint)
-    # Url should be in format "/user/country=USA"
+        # Country code should be sent with post request and id "code"
+        # Expecting the 2 digit country codes on the flag png files.
     # Log Out (redirect to logout endpoint)
     return render_template("home.html")
 
 
-@app.route("/user")
+@app.route("/user", methods=['POST'])
 @login_is_required
 def user_page():
     # Expected input: Selected country
-    # Input should be received through url in format "user/country=USA"
+    # Input should be received through post request with id "code"
     # Expected user input: click on video, click on logout button, click on home button
     # Expected outputs
     # Video (Redirect to youtube)
     # Home (redirect to home endpoint)
     # Log Out (redirect to logout endpoint)
-    # Url should come in format "/user/country=USA"
+    # Url should come in format "/user/us"
+
+    # Calling API
+    TitleList, IDList, VideoInformation = yt.GetTopFive(flow)
+
+    # Get country code
+    code = request.form['code']
+
+    # Create image link to render flag
+    flag = "../static/resources/" + code + ".png"
+    print(flag)
 
     # Load user info
 
@@ -178,7 +191,7 @@ def user_page():
     # This should be a list of urls extracted from a JSON response.
 
     # Pass info to render in page
-    return render_template("user.html")
+    return render_template("user.html", titles = TitleList, ids = IDList, videoinfo = VideoInformation, flagsrc = flag)
 
 
 # Initialize db and run application

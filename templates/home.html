@@ -1,16 +1,26 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/static/style.css">
-        <title>Home Page</title>
-    </head>
-    <body>
-        <h1>Home Page yay</h1>
-        <form action="/user" method="GET">
-            <input type="submit" value="Go to user page"></input>
-        </form>
-        <form action="/login" method="GET">
-            <input type="submit" value="Go to login page"></input>
-        </form>
-        <a href ='/logout'><button>Logout</button></a>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <h1>Home Page yay</h1>
+    <form action="/user" method="POST">
+        <input type="hidden" name="code" id="code" value="us">
+        <input type="submit" value="Go to user page"></input>
+    </form>
+    <form action="/login" method="GET">
+        <input type="submit" value="Go to login page"></input>
+    </form>
+
+    <div class="container" id="fav_container">
+    </div>
+    <div class="container" id="container">
+        <script type="text/javascript" src="/static/flag.js"></script>
+    </div>
+    <a href='/logout'><button>Logout</button></a>
+</body>
+
 </html>
