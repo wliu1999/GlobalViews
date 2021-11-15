@@ -39,6 +39,17 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
+# database: user and fav_flag_array for each user
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(50), nullable=True)
+    fav_flag_array = db.Column(db.PickleType, nullable=True)
+
+
+# pass the favorite flag array from home.html and make a python obj and add to db
+# session.add(python_object)
+# session.commit()
+
 # google login ids ad secret keys
 app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -136,7 +147,6 @@ def callback():
     return redirect("/home")
 
 
-
 @app.route("/logout")
 def logout():
     # Expected input: none
@@ -154,13 +164,13 @@ def home_page():
     # Expected user input: click on country, click on logout button
     # Expected outputs:
     # Selected country (redirect to user endpoint)
-        # Country code should be sent with post request and id "code"
-        # Expecting the 2 digit country codes on the flag png files.
+    # Country code should be sent with post request and id "code"
+    # Expecting the 2 digit country codes on the flag png files.
     # Log Out (redirect to logout endpoint)
     return render_template("home.html")
 
 
-@app.route("/user", methods=['POST'])
+@app.route("/user", methods=["POST"])
 @login_is_required
 def user_page():
     # Expected input: Selected country
@@ -176,7 +186,7 @@ def user_page():
     TitleList, IDList, VideoInformation = yt.GetTopFive(flow)
 
     # Get country code
-    code = request.form['code']
+    code = request.form["code"]
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
@@ -191,7 +201,13 @@ def user_page():
     # This should be a list of urls extracted from a JSON response.
 
     # Pass info to render in page
-    return render_template("user.html", titles = TitleList, ids = IDList, videoinfo = VideoInformation, flagsrc = flag)
+    return render_template(
+        "user.html",
+        titles=TitleList,
+        ids=IDList,
+        videoinfo=VideoInformation,
+        flagsrc=flag,
+    )
 
 
 # Initialize db and run application
