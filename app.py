@@ -50,9 +50,6 @@ class User(db.Model,UserMixin):
 
 
 current_user = ""
-# pass the favorite flag array from home.html and make a python obj and add to db
-# session.add(python_object)
-# session.commit()
 
 # google login ids ad secret keys
 app.secret_key = os.getenv("secret_key")
@@ -77,21 +74,6 @@ login_manager = LoginManager(app)
 def load_user(id):
     return User.query.get((id))
 
-
-# Database classes here
-# Username probably subject to change based on how Google OAuth works, as that's how we're logging users in.
-# Country 1-5 are meant to store the user's 5 favorite countries to be pinned in order
-# This is just an idea subject to change
-# Accountage stored in hours
-
-# UserPreferences Table
-# username = db.Column(db.String(20), primary_key=True)
-# country1 = db.Column(db.String(40))
-# country2 = db.Column(db.String(40))
-# country3 = db.Column(db.String(40))
-# country4 = db.Column(db.String(40))
-# country5 = db.Column(db.String(40))
-# accountage = db.Column(db.Integer)
 
 # App Routing
 @app.route("/")
@@ -152,11 +134,10 @@ def callback():
     global current_user
     current_user = emailID
 
-    # Setup EmailID variable to get user's username here
-
-
-    #Query the database of users to see if the user logging in exists in the db
-    exists = db.session.query(User.user_id).filter_by(user_id=emailID).first() is not None
+    # Query the database of users to see if the user logging in exists in the db
+    exists = (
+        db.session.query(User.user_id).filter_by(user_id=emailID).first() is not None
+    )
     if not exists:
         empty = db.session.query(User.id).first() is None
         if empty:
@@ -220,7 +201,6 @@ def user_page():
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
-    print(flag)
 
     # Load user info
 
@@ -250,11 +230,8 @@ def save_favorite():
     return redirect("/home")
 
 
-# Initialize db and run application
 # For testing, comment out host and port lines.
 
-# Add once model for database has been created
-# db.create_all()
 app.run(
     debug=True
     # host="0.0.0.0",
