@@ -237,6 +237,18 @@ def user_page():
         flagsrc=flag,
     )
 
+@app.route("/save_favorite", methods=["POST"])
+@login_is_required
+def save_favorite():
+    data = request.form['savefave']
+
+    username = current_user.username
+    user = User.query.filter_by(user_id=username).first()
+    user.fav_flag_array = data
+    db.session.commit()
+    
+    return redirect("/home")
+
 
 # Initialize db and run application
 # For testing, comment out host and port lines.
