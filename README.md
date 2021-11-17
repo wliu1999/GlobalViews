@@ -1,4 +1,7 @@
-# Hello Friends this is a readme
+# GlobalViews Readme
+
+## Heroku URL
+[Heroku Link](https://global-views.herokuapp.com/)
 
 ## Initial Setup / Workflow order
 Type in the terminal in order to finish initial setup
@@ -8,6 +11,16 @@ Type in the terminal in order to finish initial setup
 3. git init
 4. git remote add origin git@github.com:wliu1999/GlobalViews.git
 5. git pull origin main
+
+## Additional Setup Steps
+
+1. Create an account on Google developer
+2. Register your application with Google
+3. Obtain an API key and a OAuth 2.0 Client ID. The OAuth ID should have application type Desktop app.
+4. Create a .env folder to store hidden variables.
+5. Download the OAuth 2.0 Client ID information as a json file, and input the API key into your .env file.
+6. Create an account on Heroku and register your application there. 
+7. Provision a postgresql
 
 After initial setup workflow order
 
