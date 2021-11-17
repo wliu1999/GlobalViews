@@ -43,10 +43,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
 # database: user and fav_flag_array for each user
-class User(db.Model,UserMixin):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer)
     user_id = db.Column(db.String(50), primary_key=True)
-    fav_flag_array = db.Column(db.PickleType, nullable=True)
+    fav_flag_array = db.Column(db.String(10), nullable=True)
 
 
 # pass the favorite flag array from home.html and make a python obj and add to db
@@ -95,6 +95,8 @@ def load_user(id):
 # App Routing
 @app.route("/")
 def index():
+    # create table if it doesn't exist, if exists do nothing
+    db.create_all()
     # Probably doesn't need to be modified
     return flask.redirect(flask.url_for("login_page"))
 
@@ -151,9 +153,10 @@ def callback():
 
     # Setup EmailID variable to get user's username here
 
-
-    #Query the database of users to see if the user logging in exists in the db
-    exists = db.session.query(User.user_id).filter_by(user_id=emailID).first() is not None
+    # Query the database of users to see if the user logging in exists in the db
+    exists = (
+        db.session.query(User.user_id).filter_by(user_id=emailID).first() is not None
+    )
     if not exists:
         empty = db.session.query(User.id).first() is None
         if empty:
@@ -161,12 +164,12 @@ def callback():
         else:
             new_id_row = db.session.query(User.id).order_by(User.id.desc()).first()
             new_id = new_id_row.id + 1
-        #If we can't find the user, create a line for them and log them in.
+        # If we can't find the user, create a line for them and log them in.
         new_user = User(user_id=emailID, id=new_id)
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        
+
     else:
         user = User.query.filter_by(user_id=emailID).first()
         login_user(user)
