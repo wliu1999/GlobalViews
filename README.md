@@ -20,7 +20,7 @@ Type in the terminal in order to finish initial setup
 4. Create a .env folder to store hidden variables.
 5. Download the OAuth 2.0 Client ID information as a json file, and input the API key into your .env file.
 6. Create an account on Heroku and register your application there. 
-7. Provision a postgresql
+7. Provision a postgresql database on heroku
 
 After initial setup workflow order
 
