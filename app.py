@@ -238,6 +238,14 @@ def user_page():
     )
 
 
+@app.route("/save_favorite", methods=["POST"])
+@login_is_required
+def save_favorite():
+    data = request.form["savefave"]
+    print(data)
+    return redirect("/home")
+
+
 # Initialize db and run application
 # For testing, comment out host and port lines.
 
