@@ -49,6 +49,7 @@ class User(db.Model, UserMixin):
     fav_flag_array = db.Column(db.String(10), nullable=True)
 
 
+current_user = ""
 # pass the favorite flag array from home.html and make a python obj and add to db
 # session.add(python_object)
 # session.commit()
@@ -150,6 +151,8 @@ def callback():
 
     # variable pulls user email ID
     emailID = id_info.get("email")
+    global current_user
+    current_user = emailID
 
     # Setup EmailID variable to get user's username here
 
@@ -243,8 +246,7 @@ def user_page():
 def save_favorite():
     data = request.form["savefave"]
 
-    username = current_user.username
-    user = User.query.filter_by(user_id=username).first()
+    user = User.query.filter_by(user_id=current_user).first()
     user.fav_flag_array = data
     db.session.commit()
 
