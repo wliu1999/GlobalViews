@@ -64,7 +64,7 @@ scopes = [
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=scopes,
-    redirect_uri="https://global-views.herokuapp.com/callback",
+    redirect_uri="http://127.0.0.1:5000/callback",
 )
 
 login_manager = LoginManager(app)
@@ -237,5 +237,5 @@ def save_favorite():
 app.run(
     # debug=True
     host="0.0.0.0",
-    port=int(os.getenv("PORT", 5000)),
+    port=int(os.getenv("PORT", 8080)),
 )
