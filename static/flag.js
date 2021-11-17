@@ -84,6 +84,12 @@ function pass_region_code(i) {
     document.getElementById("form_id").submit();
 }
 
+// function to save a flag as a favorite
+function save_favorite_code(i) {
+    document.getElementById("code").value = region_code_array[i];
+    document.getElementById("fave").submit();
+}
+
 // function to add flag to fav_image_array, only if array length < 4
 function add_to_fav(i) {
     duplicate = false;
@@ -117,6 +123,26 @@ function add_to_fav(i) {
 
     // when fav_index == 4 create 'save' button and personalize by user
     if (fav_index == 4) {
+        if (confirm('Are you sure you want to save this thing into the database?')) {
+            // Save it!
+            // Initialize Codestring variable
+            var codestring = ""
+            var src_length = 0;
 
+            // Populate with 4 region codes
+            for (let j = 0; j < fav_index; j++) {
+                src_length = fav_image_array[j].src.length;
+                codestring = codestring + (fav_image_array[j].src.substring(src_length - 6, src_length - 4));
+            }
+
+            //Return completed codestring variable to server
+            document.getElementById('savefave').value = codestring;
+            document.getElementById('fave').submit();
+
+            console.log('Thing was saved to the database.');
+        } else {
+            // Do nothing!
+            console.log('Thing was not saved to the database.');
+        }
     }
 }
