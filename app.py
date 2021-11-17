@@ -64,7 +64,7 @@ scopes = [
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=scopes,
-    redirect_uri="http://127.0.0.1:5000/callback",
+    redirect_uri="https://global-views.herokuapp.com/callback",
 )
 
 login_manager = LoginManager(app)
