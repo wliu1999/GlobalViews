@@ -57,7 +57,13 @@ current_user = ""
 # google login ids ad secret keys
 app.secret_key = os.getenv("secret_key")
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+
+# Client Secret setup for DEPLOYMENT
+# client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+
+# Client Secret setup for LOCAL TESTING
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "local_secret.json")
+
 scopes = [
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email",
@@ -67,7 +73,11 @@ scopes = [
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=scopes,
-    redirect_uri="https://global-views.herokuapp.com/callback",
+    # Redirect URI for DEPLOYMENT
+    # redirect_uri="https://global-views.herokuapp.com/callback",
+
+    # Redirect URI for LOCAL TESTING
+    redirect_uri="http://localhost:5000/callback",
 )
 
 login_manager = LoginManager(app)
