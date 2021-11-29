@@ -19,6 +19,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # API tools
 import os
+from dotenv import load_dotenv
 import pathlib
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
@@ -30,6 +31,8 @@ import google_auth_oauthlib.flow
 # Local Imports
 import YoutubeAPI as yt
 
+# Loading dotenv file
+load_dotenv()
 
 # Fixing Database URI to postgresql format
 uri = os.getenv("DATABASE_URL")
@@ -236,6 +239,6 @@ def save_favorite():
 
 app.run(
     # debug=True
-    host="0.0.0.0",
-    port=int(os.getenv("PORT", 8080)),
+    # host="0.0.0.0",
+    # port=int(os.getenv("PORT", 8080)),
 )
