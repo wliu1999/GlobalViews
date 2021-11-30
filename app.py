@@ -19,6 +19,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 # API tools
 import os
+from dotenv import load_dotenv
 import pathlib
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
@@ -30,6 +31,8 @@ import google_auth_oauthlib.flow
 # Local Imports
 import YoutubeAPI as yt
 
+# Loading dotenv file
+load_dotenv()
 
 # Fixing Database URI to postgresql format
 uri = os.getenv("DATABASE_URL")
@@ -43,7 +46,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db = SQLAlchemy(app)
 
 # database: user and fav_flag_array for each user
-class User(db.Model,UserMixin):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer)
     user_id = db.Column(db.String(50), primary_key=True)
     fav_flag_array = db.Column(db.PickleType, nullable=True)
@@ -79,7 +82,13 @@ def load_user(id):
 @app.route("/")
 def index():
     # Probably doesn't need to be modified
-    return flask.redirect(flask.url_for("login_page"))
+    return flask.redirect(flask.url_for("landing_page"))
+
+
+@app.route("/landing_page")
+def landing_page():
+
+    return render_template("landing_page.html")
 
 
 def login_is_required(function):  # decorator for requiring login on specific pages
@@ -145,12 +154,12 @@ def callback():
         else:
             new_id_row = db.session.query(User.id).order_by(User.id.desc()).first()
             new_id = new_id_row.id + 1
-        #If we can't find the user, create a line for them and log them in.
+        # If we can't find the user, create a line for them and log them in.
         new_user = User(user_id=emailID, id=new_id)
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        
+
     else:
         user = User.query.filter_by(user_id=emailID).first()
         login_user(user)
@@ -233,7 +242,7 @@ def save_favorite():
 # For testing, comment out host and port lines.
 
 app.run(
-    # debug=True
-    host="0.0.0.0",
-    port=int(os.getenv("PORT", 8080)),
+     debug=True
+    # host="0.0.0.0",
+    # port=int(os.getenv("PORT", 8080)),
 )
