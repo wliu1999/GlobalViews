@@ -15,18 +15,30 @@
     </form>
     <a href='/logout'><button>Logout</button></a>
 
-    <div class = "videocontainer">
-        <img src = {{ flagsrc }} alt="Flag">
+
+
+    <form action="/user" method="POST">
+        <label for="category">Choose a Category:</label>
+        <select id="category" name="category">
+            <option value="Film & Animation">Film & Animation</option>
+            <option value="Music">Music</option>
+            <option value="Sports">Sports</option>
+            <option value="Gaming">Gaming</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="videocontainer">
+        <img src={{ flagsrc }} alt="Flag">
         <ul>
             {% for item in videoinfo %}
-                <h1>{{ item[0] }}</h1>
-                <iframe width="630" height="354"
-                    src={{ item[1] }}>
-                </iframe>
-                <h2>{{ item[2] }}</h2>
-                <h2>Tags</h2>
-                <h2>{{ item[3] }}</h2>
-                <h1> ----------------------------------------------------- </h1>
+            <h1>{{ item[0] }}</h1>
+            <iframe width="630" height="354" src={{ item[1] }}>
+            </iframe>
+            <h2>{{ item[2] }}</h2>
+            <h2>Tags</h2>
+            <h2>{{ item[3] }}</h2>
+            <h1> ----------------------------------------------------- </h1>
             {% endfor %}
         </ul>
     </div>

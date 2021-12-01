@@ -204,6 +204,7 @@ def user_page():
 
     # If there is a category specified, it will initialize
     category = request.form["category"]
+    print(category)
     # Calling API
     VideoInformation = yt.GetTopFive(code, category)
 
