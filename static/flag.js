@@ -142,7 +142,16 @@ function add_to_fav(i) {
             console.log('Thing was saved to the database.');
         } else {
             // Do nothing!
+            fav_image_array = [];
+            fav_index = 0;
+            document.getElementById('redirect').submit();
             console.log('Thing was not saved to the database.');
         }
     }
+}
+
+function onload() {
+    // function to get value from the html to js
+    // value should be passed from app.py to html fetching data from db
+
 }
