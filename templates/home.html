@@ -6,9 +6,9 @@
 </head>
 
 <body onload="favflagonload()">
-    <div class = "flagcontainer">
+    <div class="flagcontainer">
         <h1>Welcome to Globalviews! To view a country's information, click on their flag!</h1>
-        <div class = "flagleft">
+        <div class="flagleft">
             <form action="/user" id="form_id" method="POST">
                 <input type="hidden" name="code" id="code" value="us">
                 <input type="hidden" name="category" id="category" value="zero">
@@ -19,8 +19,10 @@
                 <input type="submit" value="Logout"></input>
             </form>
         </div>
-        <div class = "flagright">
+        <div class="flagright">
             <div class="container" id="user_fav">
+            </div>
+            <div class="container" id="fav_container">
             </div>
             <div class="container" id="container">
                 <script type="text/javascript" src="/static/flag.js"></script>
