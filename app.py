@@ -67,7 +67,7 @@ scopes = [
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=scopes,
-    redirect_uri="http://127.0.0.1:5000/callback",
+    redirect_uri="https://global-views2.herokuapp.com/callback",
 )
 
 login_manager = LoginManager(app)
@@ -81,10 +81,14 @@ def load_user(id):
 # App Routing
 @app.route("/")
 def index():
-    # create table if it doesn't exist, if exists do nothing
-    db.create_all()
     # Probably doesn't need to be modified
-    return flask.redirect(flask.url_for("login_page"))
+    return flask.redirect(flask.url_for("landing_page"))
+
+
+@app.route("/landing_page")
+def landing_page():
+
+    return render_template("landing_page.html")
 
 
 def login_is_required(function):  # decorator for requiring login on specific pages
@@ -238,7 +242,7 @@ def save_favorite():
 # For testing, comment out host and port lines.
 
 app.run(
-    # debug=True
-    # host="0.0.0.0",
-    # port=int(os.getenv("PORT", 8080)),
+     #debug=True
+     host="0.0.0.0",
+     port=int(os.getenv("PORT", 8080)),
 )
