@@ -2,63 +2,61 @@
 
 <head>
     <link rel="stylesheet" href="/static/style.css">
-    <title>User Page</title>
+    <title>GlobalViews User Page</title>
 </head>
 
 <body>
-    <h1>User Page yay</h1>
-    <form action="/home" method="GET">
-        <input type="submit" value="Go to home page"></input>
-    </form>
-    <form action="/login" method="GET">
-        <input type="submit" value="Go to login page"></input>
-    </form>
-    <a href='/logout'><button>Logout</button></a>
-
-    <form action="/user" method="POST">
-        <label for="category">Choose a Category:</label>
-        <select id="category" name="category">
-            <option value="1">Film & Animation</option>
-            <option value="10">Music</option>
-            <option value="17">Sports</option>
-            <option value="20">Gaming</option>
-            <option value="2">Autos & Animation</option>
-            <option value="15">Pets & Animals</option>
-            <option value="19">Travel & Events</option>
-            <option value="23">Comedy</option>
-            <option value="24">Entertainment</option>
-            <option value="28">Science & Tech</option>
-            <option value="25">News & Politics</option>
-        </select>
-        <input type="hidden" name="code" id="code" value= {{ code }}>
-        <input type="hidden" name="numVideos" id="numVideos" value= {{ numVideos }}>
-        <input type="submit" value="Submit" >
-    </form>
-
-    <form action="/user" method="POST">
-        <h2> How many videos would you like to see? </h2>
-        <input type="number" name="numVideos" id="numVideos">
-        <input type="hidden" name="category" id="category" value= {{ category }}>
-        <input type="hidden" name="code" id="code" value= {{ code }}>
-        <input type="submit" value="See more videos!"></input>
-    </form>
-
     <div class = "videocontainer">
-        <img src = {{ flagsrc }} alt="Flag">
-        <ul>
-            {% for item in videoinfo %}
-                <h1>{{ item[0] }}</h1>
-                <iframe width="630" height="354"
-                    src={{ item[1] }}>
-                </iframe>
-                <h2>{{ item[4] }} views --------------------------- {{ item[5] }} likes {{ item[6] }} dislikes</h2>
-                <h2>This video has {{ item[7] }} comments.</h2>
-                <h2>{{ item[2] }}</h2>
-                <h2>Tags</h2>
-                <h2>{{ item[3] }}</h2>
-                <h1> ----------------------------------------------------- </h1>
-            {% endfor %}
-        </ul>
+        <div class = "vidleft">
+            <img class = "flagimg" src = {{ flagsrc }} alt="Flag">
+            <form action="/home" method="GET">
+                <input type="submit" value="Go to home page"></input>
+            </form>
+            <form action="/login" method="GET">
+                <input type="submit" value="Logout"></input>
+            </form>
+            <form action="/user" method="POST">
+                <label for="category">Choose a Category:</label>
+                <select id="category" name="category">
+                    <option value="1">Film & Animation</option>
+                    <option value="10">Music</option>
+                    <option value="17">Sports</option>
+                    <option value="20">Gaming</option>
+                    <option value="2">Autos & Animation</option>
+                    <option value="15">Pets & Animals</option>
+                    <option value="19">Travel & Events</option>
+                    <option value="23">Comedy</option>
+                    <option value="24">Entertainment</option>
+                    <option value="28">Science & Tech</option>
+                    <option value="25">News & Politics</option>
+                </select>
+                <input type="hidden" name="code" id="code" value= {{ code }}>
+                <input type="hidden" name="numVideos" id="numVideos" value= {{ numVideos }}>
+                <input type="submit" value="Submit" >
+            </form>
+
+            <form action="/user" method="POST">
+                <h2> How many videos would you like to see? </h2>
+                <input type="number" name="numVideos" id="numVideos">
+                <input type="hidden" name="category" id="category" value= {{ category }}>
+                <input type="hidden" name="code" id="code" value= {{ code }}>
+                <input type="submit" value="See more videos!"></input>
+            </form>
+        </div>
+        <div class="vidright">
+            <ul>
+                {% for item in videoinfo %}
+                    <h1>{{ item[0] }}</h1>
+                    <iframe width="630" height="354"
+                        src={{ item[1] }}>
+                    </iframe>
+                    <h2>{{ item[2] }}</h2>
+                    <h2>Tags</h2>
+                    <h2>{{ item[3] }}</h2>
+                    <h1> ----------------------------------------------------- </h1>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 

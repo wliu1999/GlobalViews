@@ -1,5 +1,5 @@
 body{
-    background-color:rgb(127, 252, 194);
+    background-color:rgba(206, 226, 255, 0.952);
 }
 
 h1{
@@ -15,14 +15,14 @@ h1{
     grid-column-gap: 10px;
     grid-row-gap: 50px;
     grid-template-columns: auto auto auto auto;
-    background-color: #65c49c;
+    background-color:rgba(206, 226, 255, 0.952);
     padding: 20px;
     border-radius: 4px;
     justify-items: center;
 }
   
 .item {
-    background-color: rgba(127, 252, 194);
+    background-color:rgba(206, 226, 255, 0.952);
     border: 1px solid rgba(0, 0, 0);
     border-radius: 4px;
     height: 160px;
@@ -41,21 +41,55 @@ img:hover {
 }
   
 .videocontainer{
-    width:900px;
+    width:950px;
     height:100%;
     margin:auto;
 }
 
-.lefthalf{
+.vidleft{
     float:left;
-    width:450px;
+    width:250px;
 }
 
-.righthalf{
+.vidright{
     float:right;
-    width:450px;
+    width:650px;
+}
+  
+.flagimg {
+    border-radius: 50%;  
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 25px;
 }
 
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #d80902;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+.flagcontainer{
+    width:1300px;
+    height:100%;
+    margin:auto;
+}
+
+.flagleft{
+    float:left;
+    width:12%;
+}
+
+.flagright{
+    float:right;
+    width:88%;
+}
 
 #earth {
     width: 300px;
@@ -89,5 +123,3 @@ img:hover {
 .landing_text {
     justify-items: center;
 }
-
-
