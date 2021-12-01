@@ -201,8 +201,11 @@ def user_page():
 
     # Get country code
     code = request.form["code"]
+
+    # If there is a category specified, it will initialize
+    category = request.form["category"]
     # Calling API
-    VideoInformation = yt.GetTopFive(code)
+    VideoInformation = yt.GetTopFive(code, category)
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
