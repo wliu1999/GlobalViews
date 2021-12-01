@@ -15,6 +15,14 @@
     </form>
     <a href='/logout'><button>Logout</button></a>
 
+    <form action="/user" method="POST">
+        <h2> How many videos would you like to see? </h2>
+        <input type="number" name="numVideos" id="numVideos">
+        <input type="hidden" name="category" id="category" value= {{ category }}>
+        <input type="hidden" name="code" id="code" value= {{ code }}>
+        <input type="submit" value="See more videos!"></input>
+    </form>
+
     <div class = "videocontainer">
         <img src = {{ flagsrc }} alt="Flag">
         <ul>

@@ -8,7 +8,7 @@ import googleapiclient.errors
 scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 
-def GetTopFive(code, category):
+def GetTopFive(code, category, numVideos):
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     # os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -24,11 +24,11 @@ def GetTopFive(code, category):
 
     if category != "zero":
         request = youtube.videos().list(
-        part="snippet", chart="mostPopular", regionCode=code, maxResults = 5, videoCategoryId = category
+        part="snippet", chart="mostPopular", regionCode=code, maxResults = numVideos, videoCategoryId = category
     )
     else:
         request = youtube.videos().list(
-        part="snippet", chart="mostPopular", regionCode=code, maxResults = 5
+        part="snippet", chart="mostPopular", regionCode=code, maxResults = numVideos
     )
     response = request.execute()
 
@@ -44,7 +44,7 @@ def GetTopFive(code, category):
             j = 0
             for tag in item["snippet"]["tags"]:
                 if j >= 3:
-                    tags = tags[0:len(tags) - 3]
+                    tags = tags[0:len(tags) - 2]
                     break
                 tags = tags + tag + ", "
                 j = j + 1
@@ -57,11 +57,11 @@ def GetTopFive(code, category):
 
     if category != "zero":
         request = youtube.videos().list(
-        part="statistics", chart="mostPopular", regionCode=code, maxResults = 5, videoCategoryId = category
+        part="statistics", chart="mostPopular", regionCode=code, maxResults = numVideos, videoCategoryId = category
     )
     else:
         request = youtube.videos().list(
-        part="statistics", chart="mostPopular", regionCode=code, maxResults = 5
+        part="statistics", chart="mostPopular", regionCode=code, maxResults = numVideos
     )
     response = request.execute()
 

@@ -186,6 +186,9 @@ def home_page():
     # Log Out (redirect to logout endpoint)
     return render_template("home.html")
 
+category = "zero"
+numVideos = 5
+
 
 @app.route("/user", methods=["POST"])
 @login_is_required
@@ -204,8 +207,11 @@ def user_page():
 
     # If there is a category specified, it will initialize
     category = request.form["category"]
+
+    # Get the number of videos the user wants
+    numVideos = request.form["numVideos"]
     # Calling API
-    VideoInformation = yt.GetTopFive(code, category)
+    VideoInformation = yt.GetTopFive(code, category, numVideos)
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
@@ -223,6 +229,9 @@ def user_page():
         "user.html",
         videoinfo=VideoInformation,
         flagsrc=flag,
+        code=code,
+        category=category,
+        numVideos=numVideos
     )
 
 
