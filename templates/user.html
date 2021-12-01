@@ -2,33 +2,34 @@
 
 <head>
     <link rel="stylesheet" href="/static/style.css">
-    <title>User Page</title>
+    <title>GlobalViews User Page</title>
 </head>
 
 <body>
-    <h1>User Page yay</h1>
-    <form action="/home" method="GET">
-        <input type="submit" value="Go to home page"></input>
-    </form>
-    <form action="/login" method="GET">
-        <input type="submit" value="Go to login page"></input>
-    </form>
-    <a href='/logout'><button>Logout</button></a>
-
     <div class = "videocontainer">
-        <img src = {{ flagsrc }} alt="Flag">
-        <ul>
-            {% for item in videoinfo %}
-                <h1>{{ item[0] }}</h1>
-                <iframe width="630" height="354"
-                    src={{ item[1] }}>
-                </iframe>
-                <h2>{{ item[2] }}</h2>
-                <h2>Tags</h2>
-                <h2>{{ item[3] }}</h2>
-                <h1> ----------------------------------------------------- </h1>
-            {% endfor %}
-        </ul>
+        <div class = "vidleft">
+            <img class = "flagimg" src = {{ flagsrc }} alt="Flag">
+            <form action="/home" method="GET">
+                <input type="submit" value="Go to home page"></input>
+            </form>
+            <form action="/login" method="GET">
+                <input type="submit" value="Logout"></input>
+            </form>
+        </div>
+        <div class="vidright">
+            <ul>
+                {% for item in videoinfo %}
+                    <h1>{{ item[0] }}</h1>
+                    <iframe width="630" height="354"
+                        src={{ item[1] }}>
+                    </iframe>
+                    <h2>{{ item[2] }}</h2>
+                    <h2>Tags</h2>
+                    <h2>{{ item[3] }}</h2>
+                    <h1> ----------------------------------------------------- </h1>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 
