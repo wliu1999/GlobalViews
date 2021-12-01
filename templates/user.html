@@ -26,18 +26,6 @@
         <input type="submit" value="Submit">
     </form>
 
-    <div class="videocontainer">
-        <img src={{ flagsrc }} alt="Flag">
-        <ul>
-            {% for item in videoinfo %}
-            <h1>{{ item[0] }}</h1>
-            <iframe width="630" height="354" src={{ item[1] }}>
-            </iframe>
-            <h2>{{ item[2] }}</h2>
-            <h2>Tags</h2>
-            <h2>{{ item[3] }}</h2>
-            <h1> ----------------------------------------------------- </h1>
-
     <form action="/user" method="POST">
         <h2> How many videos would you like to see? </h2>
         <input type="number" name="numVideos" id="numVideos">
@@ -60,7 +48,6 @@
                 <h2>Tags</h2>
                 <h2>{{ item[3] }}</h2>
                 <h1> ----------------------------------------------------- </h1>
-
             {% endfor %}
         </ul>
     </div>
