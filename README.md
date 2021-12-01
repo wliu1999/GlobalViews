@@ -1,7 +1,6 @@
 # GlobalViews Readme
 
 ## Heroku URL
-[Deployment Link](http://global-views2.herokuapp.com/landing_page)
 [Heroku Link](https://global-views.herokuapp.com/)
 
 ## Initial Setup / Workflow order
