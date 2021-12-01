@@ -53,6 +53,7 @@ class User(db.Model, UserMixin):
 
 
 current_user = ""
+user_fav = ""
 
 # google login ids ad secret keys
 app.secret_key = os.getenv("secret_key")
@@ -188,7 +189,8 @@ def home_page():
     # Country code should be sent with post request and id "code"
     # Expecting the 2 digit country codes on the flag png files.
     # Log Out (redirect to logout endpoint)
-    return render_template("home.html")
+    data = user_fav
+    return render_template("home.html", data=data)
 
 
 @app.route("/user", methods=["POST"])
@@ -234,6 +236,8 @@ def save_favorite():
 
     user = User.query.filter_by(user_id=current_user).first()
     user.fav_flag_array = data
+    global user_fav
+    user_fav = user.fav_flag_array
     db.session.commit()
 
     return redirect("/home")
