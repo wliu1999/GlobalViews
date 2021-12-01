@@ -192,6 +192,9 @@ def home_page():
     data = user_fav
     return render_template("home.html", data=data)
 
+category = "zero"
+numVideos = 5
+
 
 @app.route("/user", methods=["POST"])
 @login_is_required
@@ -207,8 +210,15 @@ def user_page():
 
     # Get country code
     code = request.form["code"]
+
+    # If there is a category specified, it will initialize
+    category = request.form["category"]
+
+    # Get the number of videos the user wants
+    numVideos = request.form["numVideos"]
+
     # Calling API
-    VideoInformation = yt.GetTopFive(code)
+    VideoInformation = yt.GetTopFive(code, category, numVideos)
 
     # Create image link to render flag
     flag = "../static/resources/" + code + ".png"
@@ -226,6 +236,9 @@ def user_page():
         "user.html",
         videoinfo=VideoInformation,
         flagsrc=flag,
+        code=code,
+        category=category,
+        numVideos=numVideos
     )
 
 

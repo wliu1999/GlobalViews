@@ -10,6 +10,9 @@
     <h1>{{ emailID }}</h1>
     <form action="/user" id="form_id" method="POST">
         <input type="hidden" name="code" id="code" value="us">
+        <input type="hidden" name="category" id="category" value="zero">
+        <input type="hidden" name="numVideos" id="numVideos" value=5>
+        <input type="submit" value="Go to user page"></input>
     </form>
     <form action="/save_favorite" id="fave" method="POST">
         <input type="hidden" name="savefave" id="savefave" value="us">
