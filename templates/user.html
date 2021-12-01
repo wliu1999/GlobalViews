@@ -19,9 +19,13 @@
         <img src = {{ flagsrc }} alt="Flag">
         <ul>
             {% for item in videoinfo %}
-                <img src = {{ item[2] }} alt="Video Thumbnail">
                 <h1>{{ item[0] }}</h1>
-                <a href = {{ item[1] }}>Youtube Link</a>
+                <iframe width="630" height="354"
+                    src={{ item[1] }}>
+                </iframe>
+                <h2>{{ item[2] }}</h2>
+                <h2>Tags</h2>
+                <h2>{{ item[3] }}</h2>
                 <h1> ----------------------------------------------------- </h1>
             {% endfor %}
         </ul>

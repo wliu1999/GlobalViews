@@ -23,7 +23,7 @@ def GetTopFive(code):
     )
 
     request = youtube.videos().list(
-        part="snippet", chart="mostPopular", regionCode=code
+        part="snippet", chart="mostPopular", regionCode=code, maxResults = 5
     )
     response = request.execute()
 
@@ -32,8 +32,16 @@ def GetTopFive(code):
     for item in response["items"]:
         VideoInformation.append([])
         VideoInformation[i].append(item["snippet"]["title"])
-        VideoInformation[i].append("https://www.youtube.com/watch?v=" + item["id"])
-        VideoInformation[i].append(item["snippet"]["thumbnails"]["medium"]["url"])
+        VideoInformation[i].append("https://www.youtube.com/embed/" + item["id"])
+        VideoInformation[i].append(item["snippet"]["description"])
+        if "tags" in item["snippet"]:
+            tags = ""
+            for tag in item["snippet"]["tags"]:
+                tags = tags + tag + " "
+            VideoInformation[i].append(tags)
+        else:
+            VideoInformation[i].append("No tags")
+        VideoInformation[i][2] = VideoInformation[i][2][0:200] + "..."
         i = i + 1
 
     return VideoInformation
