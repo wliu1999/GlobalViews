@@ -3,6 +3,10 @@ var fav_image_array = new Array();
 var region_code_array = new Array();
 var duplicate = false;
 var fav_index = 0;
+var user_fav = "";
+var user_fav_array = [];
+var flag_src = [];
+var code = "";
 
 // hardcode flags
 flag_image_array[0] = new Image();
@@ -80,14 +84,16 @@ for (let i = 0; i <= 20; i++) {
 
 // function for when flags are clicked, passes region code and redirect to user page.
 function pass_region_code(i) {
+    console.log("clicked");
     document.getElementById("code").value = region_code_array[i];
     document.getElementById("form_id").submit();
 }
 
-// function to save a flag as a favorite
-function save_favorite_code(i) {
-    document.getElementById("code").value = region_code_array[i];
-    document.getElementById("fave").submit();
+// function for when flags in user favorite are clicked, passes region code and redirect to user page.
+function pass_fav_code(code) {
+    console.log("clicked");
+    document.getElementById("code").value = code;
+    document.getElementById("form_id").submit();
 }
 
 // function to add flag to fav_image_array, only if array length < 4
@@ -138,8 +144,9 @@ function add_to_fav(i) {
             //Return completed codestring variable to server
             document.getElementById('savefave').value = codestring;
             document.getElementById('fave').submit();
-
             console.log('Thing was saved to the database.');
+            fav_image_array = [];
+            fav_index = 0;
         } else {
             // Do nothing!
             fav_image_array = [];
@@ -150,8 +157,25 @@ function add_to_fav(i) {
     }
 }
 
-function onload() {
-    // function to get value from the html to js
-    // value should be passed from app.py to html fetching data from db
+function favflagonload() {
+    user_fav = document.getElementById('dbflag').value;
 
+    if (user_fav != "") {
+        user_fav_array = [];
+        flag_src = [];
+        user_fav_array[0] = user_fav.substring(0, 2);
+        user_fav_array[1] = user_fav.substring(2, 4);
+        user_fav_array[2] = user_fav.substring(4, 6);
+        user_fav_array[3] = user_fav.substring(6, 8);
+
+        for (let i = 0; i < 4; i++) {
+            code = user_fav_array[i];
+            flag_src[i] = "../static/resources/" + user_fav_array[i] + ".png";
+
+            let temp = document.createElement('div');
+            temp.className = 'item';
+            temp.innerHTML = '<img src=' + flag_src[i] + ' onclick="pass_fav_code(' + code + ')" >';
+            document.getElementById('user_fav').appendChild(temp);
+        }
+    }
 }
