@@ -49,7 +49,7 @@ db = SQLAlchemy(app)
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer)
     user_id = db.Column(db.String(50), primary_key=True)
-    fav_flag_array = db.Column(db.PickleType, nullable=True)
+    fav_flag_array = db.Column(db.String(10), nullable=True)
 
 
 current_user = ""
@@ -67,7 +67,7 @@ scopes = [
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=scopes,
-    redirect_uri="https://global-views.herokuapp.com/callback",
+    redirect_uri="https://global-views2.herokuapp.com/callback",
 )
 
 login_manager = LoginManager(app)
@@ -242,7 +242,7 @@ def save_favorite():
 # For testing, comment out host and port lines.
 
 app.run(
-     debug=True
-    # host="0.0.0.0",
-    # port=int(os.getenv("PORT", 8080)),
+     #debug=True
+     host="0.0.0.0",
+     port=int(os.getenv("PORT", 8080)),
 )
