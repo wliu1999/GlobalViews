@@ -5,7 +5,7 @@
     <title>Home Page</title>
 </head>
 
-<body>
+<body onload="favflagonload()">
     <h1>Home Page yay</h1>
     <h1>{{ emailID }}</h1>
     <form action="/user" id="form_id" method="POST">
@@ -16,14 +16,18 @@
     </form>
     <form action="/save_favorite" id="fave" method="POST">
         <input type="hidden" name="savefave" id="savefave" value="us">
-        <input type="submit" value="Save as favorite"></input>
+        <input type="hidden" name="dbflag" id="dbflag" value="{{ data }}">
     </form>
-    <form action="/login" method="GET">
-        <input type="submit" value="Go to login page"></input>
+    <form action="/home" id="redirect">
+        <input type="hidden" name="tohome" id="tohome">
     </form>
 
+    <div class="container" id="user_fav">
+    </div>
+    <br>
     <div class="container" id="fav_container">
     </div>
+    <br>
     <div class="container" id="container">
         <script type="text/javascript" src="/static/flag.js"></script>
     </div>
