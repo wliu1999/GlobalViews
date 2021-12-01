@@ -53,7 +53,7 @@ def GetTopFive(code, category, numVideos):
             VideoInformation[i].append("No tags")
         VideoInformation[i][2] = VideoInformation[i][2][0:200] + "..."
         i = i + 1
-
+  
 
     if category != "zero":
         request = youtube.videos().list(
@@ -72,5 +72,13 @@ def GetTopFive(code, category, numVideos):
         VideoInformation[i].append(item["statistics"]["dislikeCount"])
         VideoInformation[i].append(item["statistics"]["commentCount"])
         i = i + 1
+     
+    request = youtube.videoCategories().list(
+        part="snippet", regionCode=code
+       
+    )
+    response = request.execute()
 
+    print(response)
+    
     return VideoInformation

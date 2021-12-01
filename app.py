@@ -210,6 +210,7 @@ def user_page():
 
     # Get the number of videos the user wants
     numVideos = request.form["numVideos"]
+
     # Calling API
     VideoInformation = yt.GetTopFive(code, category, numVideos)
 
