@@ -73,12 +73,6 @@ def GetTopFive(code, category, numVideos):
         VideoInformation[i].append(item["statistics"]["commentCount"])
         i = i + 1
      
-    request = youtube.videoCategories().list(
-        part="snippet", regionCode=code
-       
-    )
-    response = request.execute()
 
-    print(response)
     
     return VideoInformation

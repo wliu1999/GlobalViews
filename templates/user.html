@@ -18,12 +18,21 @@
     <form action="/user" method="POST">
         <label for="category">Choose a Category:</label>
         <select id="category" name="category">
-            <option value="Film & Animation">Film & Animation</option>
-            <option value="Music">Music</option>
-            <option value="Sports">Sports</option>
-            <option value="Gaming">Gaming</option>
+            <option value="1">Film & Animation</option>
+            <option value="10">Music</option>
+            <option value="17">Sports</option>
+            <option value="20">Gaming</option>
+            <option value="2">Autos & Animation</option>
+            <option value="15">Pets & Animals</option>
+            <option value="19">Travel & Events</option>
+            <option value="23">Comedy</option>
+            <option value="24">Entertainment</option>
+            <option value="28">Science & Tech</option>
+            <option value="25">News & Politics</option>
         </select>
-        <input type="submit" value="Submit">
+        <input type="hidden" name="code" id="code" value= {{ code }}>
+        <input type="hidden" name="numVideos" id="numVideos" value= {{ numVideos }}>
+        <input type="submit" value="Submit" >
     </form>
 
     <form action="/user" method="POST">
