@@ -1,7 +1,7 @@
 # GlobalViews Readme
 
 ## Heroku URL
-[Heroku Link](https://global-views.herokuapp.com/)
+[Heroku Link](http://global-views2.herokuapp.com/)
 
 ## Initial Setup / Workflow order
 Type in the terminal in order to finish initial setup
