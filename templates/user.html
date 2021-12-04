@@ -46,13 +46,16 @@
         <div class="vidright">
             <ul>
                 {% for item in videoinfo %}
-                <h1>{{ item[0] }}</h1>
-                <iframe width="630" height="354" src={{ item[1] }}>
-                </iframe>
-                <h2>{{ item[2] }}</h2>
-                <h2>Tags</h2>
-                <h2>{{ item[3] }}</h2>
-                <h1> ----------------------------------------------------- </h1>
+                    <h1>{{ item[0] }}</h1>
+                    <iframe width="630" height="354"
+                        src={{ item[1] }}>
+                    </iframe>
+                    <h2>{{ item[4] }} views --------------------------- {{ item[5] }} likes {{ item[6] }} dislikes</h2>
+                    <h2>This video has {{ item[7] }} comments.</h2>
+                    <h2>{{ item[2] }}</h2>
+                    <h2>Tags</h2>
+                    <h2>{{ item[3] }}</h2>
+                    <h1> ----------------------------------------------------- </h1>
                 {% endfor %}
             </ul>
         </div>

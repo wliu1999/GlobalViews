@@ -193,6 +193,7 @@ def home_page():
     return render_template("home.html", data=data, emailID=current_user)
 
 
+
 category = "zero"
 numVideos = 5
 
@@ -260,7 +261,7 @@ def save_favorite():
 # For testing, comment out host and port lines.
 
 app.run(
-    debug=True
-    # host="0.0.0.0",
-    # port=int(os.getenv("PORT", 8080)),
+    # debug=True
+    host="0.0.0.0",
+    port=int(os.getenv("PORT", 8080)),
 )
