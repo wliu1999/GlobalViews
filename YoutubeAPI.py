@@ -24,12 +24,16 @@ def GetTopFive(code, category, numVideos):
 
     if category != "zero":
         request = youtube.videos().list(
-        part="snippet", chart="mostPopular", regionCode=code, maxResults = numVideos, videoCategoryId = category
-    )
+            part="snippet",
+            chart="mostPopular",
+            regionCode=code,
+            maxResults=numVideos,
+            videoCategoryId=category,
+        )
     else:
         request = youtube.videos().list(
-        part="snippet", chart="mostPopular", regionCode=code, maxResults = numVideos
-    )
+            part="snippet", chart="mostPopular", regionCode=code, maxResults=numVideos
+        )
     response = request.execute()
 
     VideoInformation = []
@@ -44,7 +48,7 @@ def GetTopFive(code, category, numVideos):
             j = 0
             for tag in item["snippet"]["tags"]:
                 if j >= 3:
-                    tags = tags[0:len(tags) - 2]
+                    tags = tags[0 : len(tags) - 2]
                     break
                 tags = tags + tag + ", "
                 j = j + 1
@@ -53,16 +57,22 @@ def GetTopFive(code, category, numVideos):
             VideoInformation[i].append("No tags")
         VideoInformation[i][2] = VideoInformation[i][2][0:200] + "..."
         i = i + 1
-  
 
     if category != "zero":
         request = youtube.videos().list(
-        part="statistics", chart="mostPopular", regionCode=code, maxResults = numVideos, videoCategoryId = category
-    )
+            part="statistics",
+            chart="mostPopular",
+            regionCode=code,
+            maxResults=numVideos,
+            videoCategoryId=category,
+        )
     else:
         request = youtube.videos().list(
-        part="statistics", chart="mostPopular", regionCode=code, maxResults = numVideos
-    )
+            part="statistics",
+            chart="mostPopular",
+            regionCode=code,
+            maxResults=numVideos,
+        )
     response = request.execute()
 
     i = 0
@@ -72,7 +82,5 @@ def GetTopFive(code, category, numVideos):
         VideoInformation[i].append(item["statistics"]["dislikeCount"])
         VideoInformation[i].append(item["statistics"]["commentCount"])
         i = i + 1
-     
 
-    
     return VideoInformation

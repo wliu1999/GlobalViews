@@ -190,7 +190,8 @@ def home_page():
     # Expecting the 2 digit country codes on the flag png files.
     # Log Out (redirect to logout endpoint)
     data = user_fav
-    return render_template("home.html", data=data)
+    return render_template("home.html", data=data, emailID=current_user)
+
 
 category = "zero"
 numVideos = 5
@@ -238,7 +239,7 @@ def user_page():
         flagsrc=flag,
         code=code,
         category=category,
-        numVideos=numVideos
+        numVideos=numVideos,
     )
 
 
@@ -259,7 +260,7 @@ def save_favorite():
 # For testing, comment out host and port lines.
 
 app.run(
-     #debug=True
-     host="0.0.0.0",
-     port=int(os.getenv("PORT", 8080)),
+    debug=True
+    # host="0.0.0.0",
+    # port=int(os.getenv("PORT", 8080)),
 )
