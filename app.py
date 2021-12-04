@@ -190,7 +190,8 @@ def home_page():
     # Expecting the 2 digit country codes on the flag png files.
     # Log Out (redirect to logout endpoint)
     data = user_fav
-    return render_template("home.html", data=data)
+    return render_template("home.html", data=data, emailID=current_user)
+
 
 
 category = "zero"
@@ -239,7 +240,7 @@ def user_page():
         flagsrc=flag,
         code=code,
         category=category,
-        numVideos=numVideos
+        numVideos=numVideos,
     )
 
 

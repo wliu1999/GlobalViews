@@ -6,9 +6,9 @@
 </head>
 
 <body>
-    <div class = "videocontainer">
-        <div class = "vidleft">
-            <img class = "flagimg" src = {{ flagsrc }} alt="Flag">
+    <div class="videocontainer">
+        <div class="vidleft">
+            <img class="flagimg" src={{ flagsrc }} alt="Flag">
             <form action="/home" method="GET">
                 <input type="submit" value="Go to home page"></input>
             </form>
@@ -30,16 +30,16 @@
                     <option value="28">Science & Tech</option>
                     <option value="25">News & Politics</option>
                 </select>
-                <input type="hidden" name="code" id="code" value= {{ code }}>
-                <input type="hidden" name="numVideos" id="numVideos" value= {{ numVideos }}>
-                <input type="submit" value="Submit" >
+                <input type="hidden" name="code" id="code" value={{ code }}>
+                <input type="hidden" name="numVideos" id="numVideos" value={{ numVideos }}>
+                <input type="submit" value="Submit">
             </form>
 
             <form action="/user" method="POST">
                 <h2> How many videos would you like to see? </h2>
                 <input type="number" name="numVideos" id="numVideos">
-                <input type="hidden" name="category" id="category" value= {{ category }}>
-                <input type="hidden" name="code" id="code" value= {{ code }}>
+                <input type="hidden" name="category" id="category" value={{ category }}>
+                <input type="hidden" name="code" id="code" value={{ code }}>
                 <input type="submit" value="See more videos!"></input>
             </form>
         </div>
